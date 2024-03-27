@@ -1,18 +1,21 @@
-"use client";
-import { Avatar, Button, Card, Flex, Heading, Text } from "@radix-ui/themes";
+import { Avatar, Box, Card, Flex, Heading, Text } from "@radix-ui/themes";
+import PokemonInfo from "../PokemonInfo/PokemonInfo";
 
-const PokemonCard = ({ key, props }) => {
-  const { data, buttonLabel, onInfoClick } = props;
+const PokemonCard = ({ props }) => {
   return (
-    <Card key={key} style={{ maxWidth: 240 }}>
-      <Flex gap="3" align="center" justify="center" direction={"column"}>
-        <Heading>Card No. {data.id}</Heading>
-        <Avatar size="9" src={data.sprites?.front_default} radius="full" fallback="T" />
-        <Text as="div" size="2" weight="bold">
-          {data.name}
-        </Text>
-        <Button onClick={() => onInfoClick(data)}>{buttonLabel}</Button>
-      </Flex>
+    <Card className="flip-card">
+      <Box className="flip-card-inner">
+        <Flex gap="3" align="center" justify="center" direction={"column"} className="flip-card-front">
+          <Heading as="h2" style={{ fontWeight: 500 }}>
+            Card No. {props.id}
+          </Heading>
+          <Avatar size="9" src={props.sprites.other.home.front_shiny} radius="full" fallback="T" />
+          <Text as="p" size="2" style={{ marginTop: "1rem", fontWeight: 600 }}>
+            {props.name}
+          </Text>
+        </Flex>
+        <PokemonInfo props={props} />
+      </Box>
     </Card>
   );
 };
